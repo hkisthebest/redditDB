@@ -30,4 +30,4 @@ jobs:
           script: |
             docker compose down
             cd ~/redditDB/server
-            docker compose up
+            docker compose -f compose.yaml up
