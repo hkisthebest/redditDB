@@ -9,13 +9,25 @@ jobs:
     name: scp
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: copy file via ssh password
-      uses: appleboy/scp-action@v0.1.7
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.PASSWORD }}
-        port: ${{ secrets.PORT }}
-        source: "*"
-        target: ~/server/
+      - uses: actions/checkout@v4
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: "*"
+          target: ~/server/
+
+      - name: start
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+
+          script: |
+            docker compose down
+            cd server
+            docker compose up
