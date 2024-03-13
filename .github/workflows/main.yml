@@ -18,7 +18,7 @@ jobs:
           key: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           source: "*"
-          target: ~/server/
+          target: ~/redditDB/
 
       - name: start
         uses: appleboy/ssh-action@master
@@ -29,5 +29,5 @@ jobs:
 
           script: |
             docker compose down
-            cd server
+            cd ~/redditDB/server
             docker compose up
