@@ -15,7 +15,7 @@ jobs:
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
+        key: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         source: "*"
         target: ~/server/
