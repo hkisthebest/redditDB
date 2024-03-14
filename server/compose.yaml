@@ -24,7 +24,7 @@ services:
     volumes:
       - ./data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_PASSWORD=${DB_PWD}
+      - POSTGRES_PASSWORD=${{ secrets.DB_PWD }}
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_DB=reddit_db
     healthcheck:
