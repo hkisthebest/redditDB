@@ -30,13 +30,13 @@ jobs:
           script: |
             sudo docker compose -f compose.yaml down
             cd ~/redditDB/server
-            export PORT=${{ secrets.PORT }}
-            export DB_USER=${{ secrets.DB_USER}}
-            export DB_PWD=${{ secrets.DB_PWD}}
-            export DB_URL=${{ secrets.DB_URL }}
-            export REDDIT_BASIC_AUTH=${{ secrets.REDDIT_BASIC_AUTH }}
-            export REDDIT_USER=${{ secrets.REDDIT_USER }}
-            export REDDIT_PWD=${{ secrets.REDDIT_PWD }}
-            export CRONJOB=${{ secrets.CRONJOB }}
-            export ENV=${{ secrets.ENV }}
+            export PORT=${{ secrets.PORT }} \
+            export DB_USER=${{ secrets.DB_USER}} \
+            export DB_PWD=${{ secrets.DB_PWD}} \
+            export DB_URL=${{ secrets.DB_URL }} \
+            export REDDIT_BASIC_AUTH=${{ secrets.REDDIT_BASIC_AUTH }} \
+            export REDDIT_USER=${{ secrets.REDDIT_USER }} \
+            export REDDIT_PWD=${{ secrets.REDDIT_PWD }} \
+            export CRONJOB=${{ secrets.CRONJOB }} \
+            export ENV=${{ secrets.ENV }} \
             sudo docker compose -f compose.yaml up
