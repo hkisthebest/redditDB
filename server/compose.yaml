@@ -27,10 +27,10 @@ services:
     volumes:
       - ./data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
-      - POSTGRES_USER=${{ secrets.POSTGRES_USER }}
-      - POSTGRES_DB=${{ secrets.POSTGRES_DB }}
-      - PGUSER=${{ secrets.POSTGRES_USER }}
+      - POSTGRES_PASSWORD=${{ secrets.DB_PWD }}
+      - POSTGRES_USER=${{ secrets.DB_USER }}
+      - POSTGRES_DB=reddit_db
+      - PGUSER=${{ secrets.DB_USER }}
 
     healthcheck:
       test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"]
