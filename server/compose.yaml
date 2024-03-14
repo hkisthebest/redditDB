@@ -27,7 +27,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ~/data:/var/lib/postgresql/data
+      - /home/ubuntu/data:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=${DB_PWD}
       - POSTGRES_USER=${DB_USER}
