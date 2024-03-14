@@ -1,17 +1,19 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 	"server/api"
 	"server/db"
-  "server/task"
+	"server/task"
 	"time"
+
+	m "server/middleware"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
-  m "server/middleware"
-  "github.com/go-chi/cors"
+	"github.com/go-chi/cors"
 )
 
 func main() {
@@ -40,4 +42,5 @@ func main() {
 	r.Mount("/api", api.DatapointRouter())
 
 	http.ListenAndServe(os.Getenv("PORT"), r)
+  fmt.Println("Server starting on port: ", os.Getenv("PORT"))
 }
