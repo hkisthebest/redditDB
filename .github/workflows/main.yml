@@ -51,4 +51,4 @@ jobs:
             echo "CRONJOB=$CRONJOB" >> .env
             echo "ENV=$ENV" >> .env
             sudo docker compose -f compose.yaml down --rmi "all"
-            sudo docker compose -f compose.yaml up
+            sudo docker compose -f compose.yaml up -d
