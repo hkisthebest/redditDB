@@ -6,15 +6,15 @@ services:
     networks:
       - network
     environment:
-      - PORT=${{secrets.PORT}}
-      - DB_USER=${DB_USER}
-      - DB_PWD=${DB_PWD}
-      - DB_URL=${DB_URL}
-      - REDDIT_BASIC_AUTH=${REDDIT_BASIC_AUTH}
-      - REDDIT_USER=${REDDIT_USER}
-      - REDDIT_PWD=${REDDIT_PWD}
-      - CRONJOB=${CRONJOB}
-      - ENV=${ENV}
+      - PORT=$${PORT}
+      - DB_USER=$${DB_USER}
+      - DB_PWD=$${DB_PWD}
+      - DB_URL=$${DB_URL}
+      - REDDIT_BASIC_AUTH=$${REDDIT_BASIC_AUTH}
+      - REDDIT_USER=$${REDDIT_USER}
+      - REDDIT_PWD=$${REDDIT_PWD}
+      - CRONJOB=$${CRONJOB}
+      - ENV=$${ENV}
 
 
   postgres:
@@ -24,7 +24,7 @@ services:
     volumes:
       - ./data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_PASSWORD=${{ secrets.DB_PWD }}
+      - POSTGRES_PASSWORD=$${DB_PWD}
       - POSTGRES_USER=$${DB_USER}
       - POSTGRES_DB=reddit_db
     healthcheck:
