@@ -17,6 +17,7 @@ import (
 )
 
 func main() {
+  fmt.Println("Server starting on port: ", os.Getenv("PORT"))
   time.Local = time.UTC
   defer db.Pool.Close()
   db.Migrate()
@@ -42,5 +43,4 @@ func main() {
 	r.Mount("/api", api.DatapointRouter())
 
 	http.ListenAndServe(os.Getenv("PORT"), r)
-  fmt.Println("Server starting on port: ", os.Getenv("PORT"))
 }
