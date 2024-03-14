@@ -14,7 +14,7 @@ function App() {
     setLoading(true)
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/datapoints/top?duration=${duration}`)
+        const response = await fetch(`http://${window.location.host}/api/datapoints/top?duration=${duration}`)
         if (!response.ok) {
           throw new Error(response.statusText)
         }
@@ -34,7 +34,7 @@ function App() {
     setLoading(true)
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/datapoints/${subredditInput}?duration=${duration}`)
+        const response = await fetch(`http://${window.location.host}/api/datapoints/${subredditInput}?duration=${duration}`)
         if (!response.ok) {
           throw new Error(response.statusText)
         }
@@ -68,7 +68,7 @@ function App() {
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {Object.entries(result).map(([subreddit, data]) => {
           return (
-            <div key={data[0].id} style={{ boxSizing: 'border-box', }}>
+            <div key={data?.[0].id} style={{ boxSizing: 'border-box', }}>
               <Chart title={subreddit} datasets={data.map(d => ({ x: d.time, y: d.users }))
               } />
             </div>
