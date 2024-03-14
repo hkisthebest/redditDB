@@ -28,11 +28,11 @@ ChartJS.register(
 
 const options = {
   responsive: true,
-  scales: {
-    x: {
-      type: 'timeseries'
-    }
-  },
+  // scales: {
+  //   x: {
+  //     type: 'timeseries'
+  //   }
+  // },
   plugins: {
     legend: {
       position: 'top' as const,
