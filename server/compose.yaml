@@ -9,15 +9,15 @@ services:
     networks:
       - network
     environment:
-      - PORT=${PORT}
-      - DB_USER=${DB_USER}
-      - DB_PWD=${DB_PWD}
-      - DB_URL=${DB_URL}
-      - REDDIT_BASIC_AUTH=${REDDIT_BASIC_AUTH}
-      - REDDIT_USER=${REDDIT_USER}
-      - REDDIT_PWD=${REDDIT_PWD}
-      - CRONJOB=${CRONJOB}
-      - ENV=${ENV}
+      - PORT=${{ secrets.PORT }}
+      - DB_USER=${{ secrets.DB_USER}}
+      - DB_PWD=${{ secrets.DB_PWD}}
+      - DB_URL=${{ secrets.DB_URL }}
+      - REDDIT_BASIC_AUTH=${{ secrets.REDDIT_BASIC_AUTH }}
+      - REDDIT_USER=${{ secrets.REDDIT_USER }}
+      - REDDIT_PWD=${{ secrets.REDDIT_PWD }}
+      - CRONJOB=${{ secrets.CRONJOB }}
+      - ENV=${{ secrets.ENV }}
 
 
   postgres:
@@ -31,6 +31,7 @@ services:
       - POSTGRES_USER=${{ secrets.DB_USER }}
       - POSTGRES_DB=reddit_db
       - PGUSER=${{ secrets.DB_USER }}
+
 
     healthcheck:
       test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"]
