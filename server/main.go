@@ -17,6 +17,7 @@ import (
 )
 
 func main() {
+  log.SetOutput(os.Stdout)
   log.Println("Server started on port: ", os.Getenv("PORT"))
   time.Local = time.UTC
   db.Migrate()
