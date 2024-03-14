@@ -53,6 +53,7 @@ jobs:
             sudo docker compose -f compose.yaml down --rmi "all"
             sudo docker compose -f compose.yaml up -d
             cd ~/redditDB/app
+            npm install
             npm run build
             cd dist
             sudo rm -rf /var/www/html/*
