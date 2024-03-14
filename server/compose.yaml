@@ -3,21 +3,18 @@ services:
     build: .
     ports:
       - "3000:3000"
-    depends_on:
-      postgres:
-        condition: service_healthy
     networks:
       - network
     environment:
-      - PORT=${{ secrets.PORT }}
-      - DB_USER=${{ secrets.DB_USER}}
-      - DB_PWD=${{ secrets.DB_PWD}}
-      - DB_URL=${{ secrets.DB_URL }}
-      - REDDIT_BASIC_AUTH=${{ secrets.REDDIT_BASIC_AUTH }}
-      - REDDIT_USER=${{ secrets.REDDIT_USER }}
-      - REDDIT_PWD=${{ secrets.REDDIT_PWD }}
-      - CRONJOB=${{ secrets.CRONJOB }}
-      - ENV=${{ secrets.ENV }}
+      - PORT=${PORT}
+      - DB_USER=${DB_USER}
+      - DB_PWD=${DB_PWD}
+      - DB_URL=${DB_URL}
+      - REDDIT_BASIC_AUTH=${REDDIT_BASIC_AUTH}
+      - REDDIT_USER=${REDDIT_USER}
+      - REDDIT_PWD=${REDDIT_PWD}
+      - CRONJOB=${CRONJOB}
+      - ENV=${ENV}
 
 
   postgres:
@@ -27,18 +24,9 @@ services:
     volumes:
       - ./data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_PASSWORD=${{ secrets.DB_PWD }}
-      - POSTGRES_USER=${{ secrets.DB_USER }}
+      - POSTGRES_PASSWORD=${DB_PWD}
+      - POSTGRES_USER=${DB_USER}
       - POSTGRES_DB=reddit_db
-      - PGUSER=${{ secrets.DB_USER }}
-
-
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"]
-      interval: 10s
-      timeout: 60s
-      retries: 5
-      start_period: 80s
 
 networks:
   network:
