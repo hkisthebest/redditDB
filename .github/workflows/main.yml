@@ -38,16 +38,17 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PASSWORD }}
+          envs: PORT,DB_USER,DB_PWD,DB_URL,REDDIT_BASIC_AUTH,REDDIT_USER,REDDIT_PWD,CRONJOB,ENV
           script: |
             cd ~/redditDB/server
-            echo "PORT=${PORT}" > .env
-            echo "DB_USER=${DB_USER}" >> .env
-            echo "DB_PWD=${DB_PWD}" >> .env
-            echo "DB_URL=${DB_URL}" >> .env
-            echo "REDDIT_BASIC_AUTH=${REDDIT_BASIC_AUTH}" >> .env
-            echo "REDDIT_USER=${REDDIT_USER}" >> .env
-            echo "REDDIT_PWD=${REDDIT_PWD}" >> .env
-            echo "CRONJOB=${CRONJOB}" >> .env
-            echo "ENV=${ENV}" >> .env
+            echo "PORT=$PORT" > .env
+            echo "DB_USER=$DB_USER" >> .env
+            echo "DB_PWD=$DB_PWD" >> .env
+            echo "DB_URL=$DB_URL" >> .env
+            echo "REDDIT_BASIC_AUTH=$REDDIT_BASIC_AUTH" >> .env
+            echo "REDDIT_USER=$REDDIT_USER" >> .env
+            echo "REDDIT_PWD=$REDDIT_PWD" >> .env
+            echo "CRONJOB=$CRONJOB" >> .env
+            echo "ENV=$ENV" >> .env
             sudo docker compose -f compose.yaml down
             sudo docker compose -f compose.yaml up
