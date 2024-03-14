@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"os"
 	"server/api"
@@ -14,10 +13,11 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
+  "log"
 )
 
 func main() {
-  fmt.Println("Server started on port: ", os.Getenv("PORT"))
+  log.Println("Server started on port: ", os.Getenv("PORT"))
   time.Local = time.UTC
   db.Migrate()
   db.Connect()
