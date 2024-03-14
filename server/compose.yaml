@@ -5,6 +5,9 @@ services:
       - "3000:3000"
     networks:
       - network
+    depends_on:
+      postgres:
+        condition: service_healthy
     environment:
       - PORT=${PORT}
       - DB_USER=${DB_USER}
