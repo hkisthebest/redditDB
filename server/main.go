@@ -44,5 +44,5 @@ func main() {
 
 	r.Mount("/api", api.DatapointRouter())
 
-	http.ListenAndServe(os.Getenv("PORT"), r)
+  http.ListenAndServe(":3000", r)
 }
