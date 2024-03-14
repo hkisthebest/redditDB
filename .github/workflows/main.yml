@@ -18,7 +18,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          rm: true
           source: "*"
           target: ~/redditDB/
 
