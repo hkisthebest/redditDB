@@ -19,7 +19,6 @@ type RedditService struct {
 func(r RedditService) FetchDataFromReddit(subreddit string) *SubRedditAboutResponse {
   r.Method = "GET"
   r.Url = fmt.Sprintf("https://oauth.reddit.com/%s/about", subreddit)
-  //fmt.Println("url", r.Url)
   req, err := http.NewRequest(r.Method, r.Url, nil)
   if err != nil {
     fmt.Println(err)
@@ -42,6 +41,7 @@ func(r RedditService) FetchDataFromReddit(subreddit string) *SubRedditAboutRespo
     json.Unmarshal(b, &rs)
     return &rs
   }
+  fmt.Println(err)
   return nil
 }
 

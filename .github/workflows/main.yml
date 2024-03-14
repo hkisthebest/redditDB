@@ -50,6 +50,5 @@ jobs:
             echo "REDDIT_PWD=$REDDIT_PWD" >> .env
             echo "CRONJOB=$CRONJOB" >> .env
             echo "ENV=$ENV" >> .env
-            sudo docker compose -f compose.yaml down
-            sudo docker image rm server-server
+            sudo docker compose -f compose.yaml down -rmi
             sudo docker compose -f compose.yaml up
