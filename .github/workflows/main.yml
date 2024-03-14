@@ -22,12 +22,23 @@ jobs:
 
       - name: start
         uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.PASSWORD }}
+        env:
+          - PORT=${{secrets.PORT}}
+          - DB_USER=${{ secrets.DB_USER }}
+          - DB_PWD=${{ secrets.DB_PWD }}
+          - DB_URL=${{ secrets.DB_URL }}
+          - REDDIT_BASIC_AUTH=${{ secrets.REDDIT_BASIC_AUTH }}
+          - REDDIT_USER=${{ secrets.REDDIT_USER }}
+          - REDDIT_PWD=${{ secrets.REDDIT_PWD }}
+          - CRONJOB=${{ secrets.CRONJOB }}
+          - ENV=${{ secrets.ENV }}
 
-          script: |
-            cd ~/redditDB/server
-            sudo docker compose -f compose.yaml down
-            sudo docker compose -f compose.yaml up
+        with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PASSWORD }}
+
+        script: |
+        cd ~/redditDB/server
+        sudo docker compose -f compose.yaml down
+        sudo docker compose -f compose.yaml up
