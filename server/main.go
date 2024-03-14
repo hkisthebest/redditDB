@@ -40,7 +40,6 @@ func main() {
     MaxAge:           300,
   }))
 
-  fmt.Println("??")
 	r.Mount("/api", api.DatapointRouter())
 
 	http.ListenAndServe(os.Getenv("PORT"), r)
