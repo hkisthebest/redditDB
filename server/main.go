@@ -19,9 +19,9 @@ import (
 func main() {
   fmt.Println("Server starting on port: ", os.Getenv("PORT"))
   time.Local = time.UTC
-  // defer db.Pool.Close()
   db.Migrate()
   db.Connect()
+  defer db.Pool.Close()
   task.Init()
   r := chi.NewRouter()
 
