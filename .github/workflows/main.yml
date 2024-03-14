@@ -55,5 +55,5 @@ jobs:
             cd ~/redditDB/app
             npm run build
             cd dist
-            sudo rm /var/www/html/*
+            sudo rm -rf /var/www/html/*
             sudo mv * /var/www/html
