@@ -1,5 +1,4 @@
 services:
-  env_file: .env
   server:
     build: .
     ports:
