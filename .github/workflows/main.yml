@@ -17,14 +17,14 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
+          port: ${{ secrets.SSH_PORT }}
           source: "*"
           target: ~/redditDB/
 
       - name: start
         uses: appleboy/ssh-action@master
         env:
-          PORT: ${{ secrets.PORT }}
+          PORT: ${{ secrets.SSH_PORT }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PWD: ${{ secrets.DB_PWD }}
           DB_URL: ${{ secrets.DB_URL }}
@@ -51,4 +51,4 @@ jobs:
             echo "CRONJOB=$CRONJOB" >> .env
             echo "ENV=$ENV" >> .env
             sudo docker compose -f compose.yaml down --rmi "all"
-            sudo docker compose -f compose.yaml up
+            sudo docker compose -f compose.yaml up -d

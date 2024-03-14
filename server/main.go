@@ -18,8 +18,6 @@ import (
 
 func main() {
   log.SetOutput(os.Stdout)
-  port := os.Getenv("PORT")
-  log.Println("Server started on port: ", port)
   time.Local = time.UTC
   db.Migrate()
   db.Connect()
@@ -44,5 +42,7 @@ func main() {
 
 	r.Mount("/api", api.DatapointRouter())
 
-  http.ListenAndServe(":3000", r)
+  port := os.Getenv("PORT")
+  http.ListenAndServe(port, r)
+  log.Println("Server started on port: ", port)
 }
