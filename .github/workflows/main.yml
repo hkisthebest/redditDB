@@ -37,8 +37,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.PASSWORD }}
-
         script: |
-        cd ~/redditDB/server
-        sudo docker compose -f compose.yaml down
-        sudo docker compose -f compose.yaml up
+          cd ~/redditDB/server
+          sudo docker compose -f compose.yaml down
+          sudo docker compose -f compose.yaml up
