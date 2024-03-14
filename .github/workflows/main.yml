@@ -52,3 +52,7 @@ jobs:
             echo "ENV=$ENV" >> .env
             sudo docker compose -f compose.yaml down --rmi "all"
             sudo docker compose -f compose.yaml up -d
+            cd ~/redditDB/app
+            npm run build
+            cd dist
+            mv * /var/www/html

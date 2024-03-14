@@ -32,7 +32,7 @@ func main() {
   r.Use(middleware.Recoverer)
   r.Use(middleware.Timeout(60 * time.Second))
   r.Use(cors.Handler(cors.Options{
-    AllowedOrigins:   []string{"https://*", "http://localhost:5173"},
+    AllowedOrigins:   []string{"https://*", "https://*"},
     AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
     AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
     ExposedHeaders:   []string{"Link"},

@@ -1,6 +1,7 @@
 package task
 
 import (
+	"log"
 	"net/http"
 	"server/dao"
 	"server/service"
@@ -8,6 +9,7 @@ import (
 )
 
 func fetchSubredditAbout() {
+  log.Println("start fetching...")
   datapointDao := &dao.DatapointDao{}
   subredditDao := &dao.SubredditDao{}
   subreddits := subredditDao.GetAllSubreddits()
