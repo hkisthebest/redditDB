@@ -28,7 +28,7 @@ jobs:
           key: ${{ secrets.PASSWORD }}
 
           script: |
-            docker compose -f compose.yaml down
+            sudo docker compose -f compose.yaml down
             cd ~/redditDB/server
             export PORT=${{ secrets.PORT }}
             export DB_USER=${{ secrets.DB_USER}}
@@ -39,4 +39,4 @@ jobs:
             export REDDIT_PWD=${{ secrets.REDDIT_PWD }}
             export CRONJOB=${{ secrets.CRONJOB }}
             export ENV=${{ secrets.ENV }}
-            docker compose -f compose.yaml up
+            sudo docker compose -f compose.yaml up
