@@ -6,16 +6,6 @@ on:
       - main
 jobs:
   deploy:
-    env:
-      PORT: ${{ secrets.PORT }}
-      DB_USER: ${{ secrets.DB_USER }}
-      DB_PWD: ${{ secrets.DB_PWD }}
-      DB_URL: ${{ secrets.DB_URL }}
-      REDDIT_BASIC_AUTH: ${{ secrets.REDDIT_BASIC_AUTH }}
-      REDDIT_USER: ${{ secrets.REDDIT_USER }}
-      REDDIT_PWD: ${{ secrets.REDDIT_PWD }}
-      CRONJOB: ${{ secrets.CRONJOB }}
-      ENV: ${{ secrets.ENV }}
 
     name: scp
     runs-on: ubuntu-latest
@@ -33,6 +23,16 @@ jobs:
 
       - name: start
         uses: appleboy/ssh-action@master
+        env:
+          PORT: ${{ secrets.PORT }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PWD: ${{ secrets.DB_PWD }}
+          DB_URL: ${{ secrets.DB_URL }}
+          REDDIT_BASIC_AUTH: ${{ secrets.REDDIT_BASIC_AUTH }}
+          REDDIT_USER: ${{ secrets.REDDIT_USER }}
+          REDDIT_PWD: ${{ secrets.REDDIT_PWD }}
+          CRONJOB: ${{ secrets.CRONJOB }}
+          ENV: ${{ secrets.ENV }}
 
         with:
           host: ${{ secrets.HOST }}
@@ -40,5 +40,14 @@ jobs:
           key: ${{ secrets.PASSWORD }}
           script: |
             cd ~/redditDB/server
+            echo "PORT=${PORT}" > .env
+            echo "PORT=${DB_USER}" >> .env
+            echo "PORT=${DB_PWD}" >> .env
+            echo "PORT=${DB_URL}" >> .env
+            echo "PORT=${REDDIT_BASIC_AUTH}" >> .env
+            echo "PORT=${REDDIT_USER}" >> .env
+            echo "PORT=${REDDIT_PWD}" >> .env
+            echo "PORT=${CRONJOB}" >> .env
+            echo "PORT=${ENV}" >> .env
             sudo docker compose -f compose.yaml down
             sudo docker compose -f compose.yaml up
