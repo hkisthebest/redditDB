@@ -19,7 +19,7 @@ import (
 func main() {
   fmt.Println("Server starting on port: ", os.Getenv("PORT"))
   time.Local = time.UTC
-  defer db.Pool.Close()
+  // defer db.Pool.Close()
   db.Migrate()
   db.Connect()
   task.Init()
