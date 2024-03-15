@@ -25,7 +25,7 @@ function App() {
           <option value="720">30 days</option>
           <option value="1200">50 days</option>
         </select>
-        <div style={{ display: 'flex', marginTop: 10, justifyContent: 'start' }}>
+        <div style={{ display: 'flex', marginTop: 20, justifyContent: 'start' }}>
           <GitHubButton href="https://github.com/hkisthebest/redditdb" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" data-show-count="true" aria-label="Star hkisthebest/redditdb on GitHub">Star</GitHubButton>
         </div>
       </div>
