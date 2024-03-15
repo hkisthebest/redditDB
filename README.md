@@ -1,5 +1,5 @@
 ## RedditDB
-This system currently only stores the active and subscribe users of the top 3000 most subscribed subreddits. I plan on expanding the datas I store within the free reddit API restrictions. 
+This system currently only stores the active and subscribe users of the top 3000 most subscribed subreddits. I plan on expanding the datas I store within the free reddit API restrictions.  
 It's only charting the users for now, for the purpose of letting you know when to post in order to have the most feedback.
 ![Screenshot](Screenshot.png)
 ## Techs
@@ -17,6 +17,7 @@ It's only charting the users for now, for the purpose of letting you know when t
 3. Docker compose up!
 ## TODOs
 - [ ] Unit tests
-- [ ] Fix the query cronjob stopping when deploying
+- [ ] Fix query cronjob stopping when deploying
+- [ ] Grafana logging
 ## Contribution
 This is just a side project of mine. However, feel free to open an issue for any suggestions or bug fixes!
