@@ -40,7 +40,8 @@ func main() {
     AllowCredentials: false,
     MaxAge:           300,
   }))
-  http.Handle("/metrics", promhttp.Handler())
+
+  r.Get("/metrics", promhttp.Handler().ServeHTTP)
 
 	r.Mount("/api", api.DatapointRouter())
 
