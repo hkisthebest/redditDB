@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { DatapointResponse } from './types/dataset'
-const apiHost: string = import.meta.env.VITE_API_HOST || 'localhost:3000'
-console.log(apiHost)
+const apiHost: string = import.meta.env.VITE_API_HOST || 'http://localhost:3000'
 export default function useSearch(input: string, duration: string) {
   const [result, setResult] = useState<DatapointResponse>({})
   const [loading, setLoading] = useState<boolean>(false)

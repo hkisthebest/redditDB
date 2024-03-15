@@ -25,9 +25,8 @@ function App() {
           <option value="1200">50 days</option>
         </select>
       </div>
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: 50 }}>
         {Object.entries(result).map(([subreddit, data]: [string, Datapoint[]]) => {
-          console.log(data)
           return (
             <div key={data?.[0].id} style={{ boxSizing: 'border-box', }}>
               <Chart title={subreddit} datasets={data.map((d: Datapoint) => {
