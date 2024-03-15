@@ -12,9 +12,9 @@ export default function useSearch(input: string, duration: string) {
       try {
         let response
         if (input.length >= 3 && input) {
-          response = await fetch(`http://${apiHost}/api/datapoints/${input}?duration=${duration}`)
+          response = await fetch(`${apiHost}/api/datapoints/${input}?duration=${duration}`)
         } else {
-          response = await fetch(`http://${apiHost}/api/datapoints/top?duration=${duration}`)
+          response = await fetch(`${apiHost}/api/datapoints/top?duration=${duration}`)
         }
         if (!response.ok) {
           throw new Error(response.statusText)
