@@ -13,7 +13,7 @@ func fetchSubredditAbout() {
   datapointDao := &dao.DatapointDao{}
   subredditDao := &dao.SubredditDao{}
   subreddits := subredditDao.GetAllSubreddits()
-  service := &service.RedditService{
+  redditService := &service.RedditService{
     Client: &http.Client{},
   }
   ticker := time.NewTicker(850 * time.Millisecond)
@@ -23,12 +23,17 @@ func fetchSubredditAbout() {
       select {
       case <- ticker.C:
         currentSubreddit := subreddits[counter]
-        subredditData := service.FetchDataFromReddit(currentSubreddit.Name)
-        if subredditData.Data.ActiveUserCount == 0 {
-          log.Printf("querying %s failed", currentSubreddit.Name)
+        subredditData := redditService.FetchDataFromReddit(currentSubreddit.Name)
+
+        var rs = &service.SubRedditAboutResponse{}
+        err := redditService.UnMarshalAboutResponseToStruct(subredditData, rs)
+
+        if err == service.SubRedditAboutErrorResponseBanned {
+          log.Println(err.Error(), currentSubreddit.Name)
+        } else if err == service.SubRedditAboutErrorResponseTooMany {
           subreddits = append(subreddits, currentSubreddit)
         } else {
-          datapointDao.InsertDatapoints(currentSubreddit.Name, subredditData.Data.ActiveUserCount, subredditData.Data.Subscribers)
+          datapointDao.InsertDatapoints(currentSubreddit.Name, rs.Data.ActiveUserCount, rs.Data.Subscribers)
         }
         counter++
       }
