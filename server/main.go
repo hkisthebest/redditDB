@@ -14,6 +14,7 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
   "log"
+  "github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 func main() {
@@ -39,6 +40,7 @@ func main() {
     AllowCredentials: false,
     MaxAge:           300,
   }))
+  http.Handle("/metrics", promhttp.Handler())
 
 	r.Mount("/api", api.DatapointRouter())
 
