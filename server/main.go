@@ -10,11 +10,12 @@ import (
 
 	m "server/middleware"
 
+	"log"
+
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
-  "log"
-  "github.com/prometheus/client_golang/prometheus/promhttp"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 func main() {
@@ -43,7 +44,7 @@ func main() {
 
   r.Get("/metrics", promhttp.Handler().ServeHTTP)
 
-	r.Mount("/api", api.DatapointRouter())
+  r.Mount("/api", api.DatapointRouter())
 
   port := os.Getenv("PORT")
   http.ListenAndServe(port, r)
