@@ -1,6 +1,7 @@
 ## RedditDB
 This system currently only stores the active and subscribe users of the top 3000 most subscribed subreddits. I plan on expanding the datas I store within the free reddit API restrictions. 
 It's only charting the users for now, for the purpose of letting you know when to post in order to have the most feedback.
+![Screenshot](Screenshot.png)
 ## Techs
 - Go
 - go-chi
