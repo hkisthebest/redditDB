@@ -12,7 +12,7 @@ import {
   scales,
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
-import { dataset } from './types/dataset'
+import { Dataset } from './types/dataset'
 
 ChartJS.register(
   scales,
@@ -28,11 +28,6 @@ ChartJS.register(
 
 const options = {
   responsive: true,
-  // scales: {
-  //   x: {
-  //     type: 'timeseries'
-  //   }
-  // },
   plugins: {
     legend: {
       position: 'top' as const,
@@ -43,7 +38,7 @@ const options = {
   },
 }
 
-function Chart({ title, datasets }: { title: string, datasets: dataset[] }) {
+function Chart({ title, datasets }: { title: string, datasets: Dataset[] }) {
   const data = {
     datasets: [
       {

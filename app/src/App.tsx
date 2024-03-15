@@ -1,54 +1,14 @@
 import './App.css'
 import Chart from './chart'
-import { useState, useEffect } from 'react'
-import { datapointResponse } from './types/dataset'
+import { useState } from 'react'
+import { DateTime } from 'luxon'
+import useSearch from './hook'
+import { Datapoint } from './types/dataset'
 
 function App() {
-  const [result, setResult] = useState<datapointResponse>({})
-  const [loading, setLoading] = useState(false)
   const [subredditInput, setsubredditInput] = useState<string>('')
   const [duration, setDuration] = useState<string>('24')
-
-  useEffect(() => {
-    if (subredditInput.length >= 3) return
-    setLoading(true)
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`http://${window.location.host}/api/datapoints/top?duration=${duration}`)
-        if (!response.ok) {
-          throw new Error(response.statusText)
-        }
-        const resultJson = await response.json()
-        setResult(resultJson)
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    }
-
-    fetchData()
-    setLoading(false)
-  }, [subredditInput, duration])
-
-  useEffect(() => {
-    if (subredditInput.length < 3) return
-    setLoading(true)
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`http://${window.location.host}/api/datapoints/${subredditInput}?duration=${duration}`)
-        if (!response.ok) {
-          throw new Error(response.statusText)
-        }
-        const resultJson = await response.json()
-        setResult(resultJson)
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    }
-
-    fetchData()
-    setLoading(false)
-  }, [subredditInput, duration])
-
+  const { result, loading } = useSearch(subredditInput, duration)
 
   if (loading) return null
 
@@ -66,10 +26,14 @@ function App() {
         </select>
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        {Object.entries(result).map(([subreddit, data]) => {
+        {Object.entries(result).map(([subreddit, data]: [string, Datapoint[]]) => {
+          console.log(data)
           return (
             <div key={data?.[0].id} style={{ boxSizing: 'border-box', }}>
-              <Chart title={subreddit} datasets={data.map(d => ({ x: d.time, y: d.users }))
+              <Chart title={subreddit} datasets={data.map((d: Datapoint) => {
+                const x = DateTime.fromISO(d.time).toFormat('MMM, d, h a')
+                return { x, y: d.users }
+              })
               } />
             </div>
           )
