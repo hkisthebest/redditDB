@@ -1,9 +1,9 @@
-export type dataset = {
+export type Dataset = {
   x: string,
   y: number,
 }
 
-export type datapoint = {
+export type Datapoint = {
   id: string,
   subreddit: string,
   time: string,
@@ -13,4 +13,4 @@ export type datapoint = {
   updatedAt: string
 }
 
-export type datapointResponse = Record<string, datapoint[]>
+export type DatapointResponse = Record<string, Datapoint[]>
