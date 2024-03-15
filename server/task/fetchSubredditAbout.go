@@ -25,6 +25,7 @@ func fetchSubredditAbout() {
         currentSubreddit := subreddits[counter]
         subredditData := service.FetchDataFromReddit(currentSubreddit.Name)
         if subredditData.Data.ActiveUserCount == 0 {
+          log.Printf("querying %s failed", currentSubreddit.Name)
           subreddits = append(subreddits, currentSubreddit)
         } else {
           datapointDao.InsertDatapoints(currentSubreddit.Name, subredditData.Data.ActiveUserCount, subredditData.Data.Subscribers)

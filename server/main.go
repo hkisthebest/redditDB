@@ -14,6 +14,7 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
   "log"
+  "github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 func main() {
@@ -32,13 +33,14 @@ func main() {
   r.Use(middleware.Recoverer)
   r.Use(middleware.Timeout(60 * time.Second))
   r.Use(cors.Handler(cors.Options{
-    AllowedOrigins:   []string{"https://*", "https://*"},
+    AllowedOrigins:   []string{"http://*", "https://*"},
     AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
     AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
     ExposedHeaders:   []string{"Link"},
     AllowCredentials: false,
     MaxAge:           300,
   }))
+  http.Handle("/metrics", promhttp.Handler())
 
 	r.Mount("/api", api.DatapointRouter())
 
