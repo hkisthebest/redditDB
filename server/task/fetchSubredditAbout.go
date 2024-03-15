@@ -37,5 +37,6 @@ func fetchSubredditAbout() {
       }
     }
   }()
+  log.Println("fetching ended...")
 
 }
