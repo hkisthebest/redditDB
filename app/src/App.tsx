@@ -10,6 +10,7 @@ function App() {
   const [subredditInput, setsubredditInput] = useState<string>('')
   const [duration, setDuration] = useState<string>('24')
   const { result, loading } = useSearch(subredditInput, duration)
+  const durationList = ['1','24','72','240','720','1200'];
 
   if (loading) return null
 
@@ -19,11 +20,11 @@ function App() {
         <h2 >Active subreddit users</h2>
         r/ <input value={subredditInput} onChange={(e) => setsubredditInput(e.target.value)} />
         <select onChange={(e) => setDuration(e.target.value)}>
-          <option value="24">1 day</option>
-          <option value="72">3 days</option>
-          <option value="240">10 days</option>
-          <option value="720">30 days</option>
-          <option value="1200">50 days</option>
+          {
+            durationList.map((data) => (
+              <option value={data}>{data} {`day${data === '1' ? '' : 's'}`}</option>
+            ))
+          }
         </select>
         <p style={{ fontWeight: 'bold' }}>All the time is shown in UTC</p>
         <div style={{ display: 'flex', marginTop: 20, justifyContent: 'start' }}>
