@@ -6,8 +6,8 @@ export default function useSearch(input: string, duration: string) {
   const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    setLoading(true)
     const fetchData = async () => {
+      setLoading(true)
       try {
         let response
         if (input.length >= 3 && input) {
@@ -15,18 +15,16 @@ export default function useSearch(input: string, duration: string) {
         } else {
           response = await fetch(`${apiHost}/api/datapoints/top?duration=${duration}`)
         }
-        if (!response.ok) {
-          throw new Error(response.statusText)
-        }
         const resultJson = await response.json() as DatapointResponse
         setResult(resultJson)
       } catch (error) {
         console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false)
       }
     }
 
     fetchData()
-    setLoading(false)
   }, [input, duration])
 
   return {
