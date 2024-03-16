@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { DateTime } from 'luxon'
 import useSearch from './hook'
 import { Datapoint } from './types/dataset'
+import GitHubButton from 'react-github-btn'
 
 function App() {
   const [subredditInput, setsubredditInput] = useState<string>('')
@@ -24,6 +25,9 @@ function App() {
           <option value="720">30 days</option>
           <option value="1200">50 days</option>
         </select>
+        <div style={{ display: 'flex', marginTop: 20, justifyContent: 'start' }}>
+          <GitHubButton href="https://github.com/hkisthebest/redditdb" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" data-show-count="true" aria-label="Star hkisthebest/redditdb on GitHub">Star</GitHubButton>
+        </div>
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: 50 }}>
         {Object.entries(result).map(([subreddit, data]: [string, Datapoint[]]) => {
