@@ -36,6 +36,9 @@ func fetchSubredditAbout() {
           datapointDao.InsertDatapoints(currentSubreddit.Name, rs.Data.ActiveUserCount, rs.Data.Subscribers)
         }
         counter++
+        if counter >= len(subreddits) {
+          log.Println("fetching ended...")
+        }
       }
       if counter >= len(subreddits) {
         ticker.Stop()
@@ -43,6 +46,5 @@ func fetchSubredditAbout() {
       }
     }
   }()
-  log.Println("fetching ended...")
 
 }
