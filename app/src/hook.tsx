@@ -9,7 +9,7 @@ export default function useSearch(input: string, duration: string) {
     setLoading(true)
     const fetchData = async () => {
       try {
-        let response
+        let response;
         if (input.length >= 3 && input) {
           response = await fetch(`${apiHost}/api/datapoints/${input}?duration=${duration}`)
         } else {
@@ -26,7 +26,12 @@ export default function useSearch(input: string, duration: string) {
     }
 
     fetchData()
-    setLoading(false)
+    .then(() => {
+      setLoading(false)
+    })
+    .catch(() => {
+      setLoading(false)
+    }) 
   }, [input, duration])
 
   return {
