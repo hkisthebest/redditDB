@@ -18,30 +18,37 @@ function App() {
     search('', 24, setLoading, setResult)
   }, [])
 
+  const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    await search(subredditInput, duration, setLoading, setResult)
+  }
+
   if (loading) return null
 
   return (
     <div style={{ flexDirection: 'row', position: 'absolute', top: 0, left: 0 }}>
       <div style={{
-        width: '20%',
         float: 'left',
         paddingLeft: 15
       }}>
         <h2 >Active subreddit users</h2>
-        r/ <input value={subredditInput}
-          onChange={(e) => setSubredditInput(e.target.value)}
-          placeholder='Three characters...'
-        />
-        <select onChange={(e) => setDuration(+e.target.value)} value={duration}>
-          {durations.map(d => (
-            <option key={d} value={d}>{d / 24} day{d === 24 ? '' : 's'}</option>
-          ))}
-        </select>
-        <input type='button'
-          onClick={() => {
-            search(subredditInput, duration, setLoading, setResult)
-          }}
-          value="Search" />
+        <form onSubmit={onFormSubmit}>
+          r/ <input value={subredditInput}
+            onChange={(e) => setSubredditInput(e.target.value)}
+            placeholder='Three characters...'
+            style={{ marginRight: 5 }}
+          />
+          <select
+            onChange={(e) => setDuration(+e.target.value)}
+            value={duration}
+            style={{ marginRight: 5 }}
+          >
+            {durations.map(d => (
+              <option key={d} value={d}>{d / 24} day{d === 24 ? '' : 's'}</option>
+            ))}
+          </select>
+          <button type='submit' value="Search">GO!</button>
+        </form>
         <p
           style={{ fontWeight: 'bold' }}>
           Time is shown in UTC
