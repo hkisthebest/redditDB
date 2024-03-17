@@ -24,7 +24,7 @@ func(s DatapointDao) GetDatapoints() (datapoints []*model.Datapoint) {
     context.Background(),
     db.Pool,
     &datapoints,
-    `SELECT id, subreddit, time, users, subscribers, created_at, updated_at FROM datapoint WHERE time >= $1 AND subreddit % $2 ORDER BY time ASC`,
+    `SELECT id, subreddit, time, users, subscribers, created_at, updated_at FROM datapoint WHERE time >= $1 AND subreddit % $2 ORDER BY subreddit <-> $2 ASC, time ASC`,
     s.TimeAfter,
     fmt.Sprintf("r/%%%s%%", s.Subreddit),
   )
