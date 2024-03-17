@@ -21,7 +21,7 @@ function App() {
   if (loading) return null
 
   return (
-    <div style={{ flexDirection: 'row' }}>
+    <div style={{ flexDirection: 'row', position: 'absolute', top: 0, left: 0 }}>
       <div style={{
         width: '20%',
         float: 'left',
