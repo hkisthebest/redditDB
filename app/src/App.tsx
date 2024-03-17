@@ -51,7 +51,7 @@ function App() {
         </form>
         <p
           style={{ fontWeight: 'bold' }}>
-          Time is shown in UTC
+          Time is shown in local time
         </p>
         <div style={{ display: 'flex', marginTop: 20, justifyContent: 'start' }}>
           <GitHubButton href="https://github.com/hkisthebest/redditdb"
