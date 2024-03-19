@@ -58,6 +58,7 @@ func getTopDatapoints(w http.ResponseWriter, r *http.Request) {
   }
 
   datapoints := query.GetTopDatapoints()
+  fmt.Println("datapoints: ", len(datapoints))
   response := make(map[string][]model.Datapoint)
   for _, datapoint := range datapoints {
     if datapoint != nil {
