@@ -24,9 +24,26 @@ func(s DatapointDao) GetDatapoints() (datapoints []*model.Datapoint) {
     context.Background(),
     db.Pool,
     &datapoints,
-    `SELECT id, subreddit, time, users, subscribers, created_at, updated_at FROM datapoint WHERE time >= $1 AND subreddit % $2 ORDER BY subreddit <-> $2 ASC, time ASC`,
+    `
+    WITH similar_subreddits AS (
+      SELECT s.*, SIMILARITY(s.name, $1) AS similarity
+      FROM subreddit s
+      WHERE s.name % $1 AND SIMILARITY(s.name, $1) > 0.4
+      ORDER BY similarity DESC
+      LIMIT 10
+    ),
+    top_datapoints AS (
+      SELECT dp.*
+      FROM datapoint dp
+      JOIN similar_subreddits ss ON dp.subreddit = ss.name
+      WHERE dp.time >= $2
+      ORDER BY ss.similarity DESC, dp.time ASC
+    )
+    SELECT *
+    FROM top_datapoints;
+    `,
+    fmt.Sprintf("r/%s", s.Subreddit),
     s.TimeAfter,
-    fmt.Sprintf("r/%%%s%%", s.Subreddit),
   )
   return datapoints
 }
