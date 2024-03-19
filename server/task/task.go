@@ -15,7 +15,7 @@ func Init() {
   if os.Getenv("CRONJOB") == "true" {
     client.RefreshToken()
     c.AddFunc("@every 20h", client.RefreshToken)
-    c.AddFunc("1 * * * *", fetchSubredditAbout)
+    c.AddFunc("* * * * *", fetchSubredditAbout)
     c.Start()
   }
 
