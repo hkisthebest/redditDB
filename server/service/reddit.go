@@ -74,10 +74,11 @@ func(r RedditService) RefreshToken() {
 func(r RedditService) UnMarshalAboutResponseToStruct(res []byte, rs *SubRedditAboutResponse) error {
   var er = &SubRedditAboutErrorResponse{}
   json.Unmarshal(res, er)
-  fmt.Println("error: ", string(res[:]), *er)
   if er.Error == 429 {
+    fmt.Println("error: ", string(res[:]), *er)
     return SubRedditAboutErrorResponseTooMany
   }else if er.Error >= 400 {
+    fmt.Println("error: ", string(res[:]), *er)
     return SubRedditAboutErrorResponseBanned
   }
   json.Unmarshal(res, &rs)
