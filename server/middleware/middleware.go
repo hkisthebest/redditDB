@@ -28,7 +28,7 @@ func MeasureResponseDuration(next http.Handler) http.Handler {
 	buckets := []float64{.005, .01, .025, .05, .1, .25, .5, 1, 2.5, 5, 10}
 
 	responseTimeHistogram := prometheus.NewHistogramVec(prometheus.HistogramOpts{
-		Namespace: "grafanacloud_hkisthebest_prom",
+		Namespace: "redditdb_response_time",
 		Name:      "http_server_request_duration_seconds",
 		Help:      "Histogram of response time for handler in seconds",
 		Buckets:   buckets,
