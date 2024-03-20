@@ -75,10 +75,10 @@ func(r RedditService) UnMarshalAboutResponseToStruct(res []byte, rs *SubRedditAb
   var er = &SubRedditAboutErrorResponse{}
   json.Unmarshal(res, er)
   if er.Error == 429 {
-    fmt.Println("error: ", string(res[:]), *er)
+    fmt.Println("error: ", string(res[:]), er.Error)
     return SubRedditAboutErrorResponseTooMany
   }else if er.Error >= 400 {
-    fmt.Println("error: ", string(res[:]), *er)
+    fmt.Println("error: ", string(res[:]), er.Error)
     return SubRedditAboutErrorResponseBanned
   }
   json.Unmarshal(res, &rs)
