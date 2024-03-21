@@ -1,7 +1,6 @@
 package task
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"server/dao"
@@ -35,7 +34,6 @@ func fetchSubredditAbout() {
           subreddits = append(subreddits, currentSubreddit)
         } else {
           datapointDao.InsertDatapoints(currentSubreddit.Name, rs.Data.ActiveUserCount, rs.Data.Subscribers)
-          fmt.Println("subreddits to go: ", len(subreddits) - counter)
         }
         counter++
         if counter >= len(subreddits) {
