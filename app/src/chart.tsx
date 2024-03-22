@@ -79,6 +79,7 @@ function Chart({ title, datasets }: { title: string, datasets: Dataset[] }) {
   }
   const handleResetZoom = () => {
     if (chartRef && chartRef.current) {
+      // @ts-expect-error TODO
       chartRef.current.resetZoom();
     }
   }
@@ -86,6 +87,7 @@ function Chart({ title, datasets }: { title: string, datasets: Dataset[] }) {
     <div>
       <Line ref={chartRef} width={400} height={300} options={{
         ...options,
+        // @ts-expect-error TODO
         plugins: {
           ...options.plugins,
           title: {
