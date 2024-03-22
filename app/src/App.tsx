@@ -1,7 +1,6 @@
 import './App.css'
 import Chart from './chart'
 import { useEffect, useState } from 'react'
-import { DateTime } from 'luxon'
 import search from './hook'
 import { Datapoint, DatapointResponse } from './types/dataset'
 import GitHubButton from 'react-github-btn'
@@ -53,6 +52,9 @@ function App() {
           style={{ fontWeight: 'bold' }}>
           Time is shown in local time
         </p>
+        <p>
+          Scroll to zoom!
+        </p>
         <div style={{ display: 'flex', marginTop: 20, justifyContent: 'start' }}>
           <GitHubButton href="https://github.com/hkisthebest/redditdb"
             data-color-scheme="no-preference: light; light: light; dark: dark;"
@@ -67,10 +69,11 @@ function App() {
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {Object.entries(result).map(([subreddit, data]: [string, Datapoint[]]) => (
           <div key={subreddit} style={{ width: '375px', boxSizing: 'border-box', padding: '5px' }}>
-            <Chart title={subreddit} datasets={data.map((d: Datapoint) => ({
-              x: DateTime.fromISO(d.time).toFormat('MMM, d, h a'),
-              y: d.users,
-            }))} />
+            <Chart
+              title={subreddit} datasets={data.map((d: Datapoint) => ({
+                x: d.time,
+                y: d.users,
+              }))} />
           </div>
         ))}
       </div>

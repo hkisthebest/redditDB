@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import 'chartjs-adapter-luxon'
 import {
   Chart as ChartJS,
@@ -13,6 +14,10 @@ import {
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
 import { Dataset } from './types/dataset'
+import zoomPlugin from 'chartjs-plugin-zoom'
+import { IoRefresh } from "react-icons/io5"
+
+
 
 ChartJS.register(
   scales,
@@ -23,10 +28,16 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  Filler
+  Filler,
+  zoomPlugin,
 )
 
 const options = {
+  scales: {
+    x: {
+      type: 'time',
+    }
+  },
   responsive: true,
   plugins: {
     legend: {
@@ -35,10 +46,25 @@ const options = {
     title: {
       display: true,
     },
+    zoom: {
+      zoom: {
+        drag: {
+          enabled: true,
+        },
+        wheel: {
+          enabled: true,
+        },
+        pinch: {
+          enabled: true,
+        },
+        mode: 'xy',
+      }
+    }
   },
 }
 
 function Chart({ title, datasets }: { title: string, datasets: Dataset[] }) {
+  const chartRef = useRef(null)
   const data = {
     datasets: [
       {
@@ -46,13 +72,19 @@ function Chart({ title, datasets }: { title: string, datasets: Dataset[] }) {
         data: datasets,
         borderColor: 'rgb(56, 157, 245)',
         backgroundColor: 'rgba(56, 157, 245)',
-        borderWidth: 2
+        borderWidth: 2,
+        radius: 3,
       },
     ],
   }
+  const handleResetZoom = () => {
+    if (chartRef && chartRef.current) {
+      chartRef.current.resetZoom();
+    }
+  }
   return (
     <div>
-      <Line width={400} height={300} options={{
+      <Line ref={chartRef} width={400} height={300} options={{
         ...options,
         plugins: {
           ...options.plugins,
@@ -62,6 +94,7 @@ function Chart({ title, datasets }: { title: string, datasets: Dataset[] }) {
           }
         }
       }} data={data} />
+      <IoRefresh onClick={handleResetZoom} title="Reset zoom" />
     </div >
   )
 }
