@@ -31,6 +31,7 @@ func fetchSubredditAbout() {
         if err == service.SubRedditAboutErrorResponseBanned {
           log.Println(err.Error(), currentSubreddit.Name)
         } else if err == service.SubRedditAboutErrorResponseTooMany {
+          log.Println(err.Error(), currentSubreddit.Name)
           subreddits = append(subreddits, currentSubreddit)
         } else {
           datapointDao.InsertDatapoints(currentSubreddit.Name, rs.Data.ActiveUserCount, rs.Data.Subscribers)
