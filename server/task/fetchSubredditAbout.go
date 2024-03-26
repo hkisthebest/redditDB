@@ -1,7 +1,6 @@
 package task
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"server/dao"
@@ -25,7 +24,6 @@ func fetchSubredditAbout() {
       case <- ticker.C:
         currentSubreddit := subreddits[counter]
         subredditData := redditService.FetchDataFromReddit(currentSubreddit.Name)
-        fmt.Println("subredditData: ", string(subredditData[:]))
 
         var rs = &service.SubRedditAboutResponse{}
         err := redditService.UnMarshalAboutResponseToStruct(subredditData, rs)
@@ -36,6 +34,9 @@ func fetchSubredditAbout() {
           log.Println(err.Error(), currentSubreddit.Name)
           subreddits = append(subreddits, currentSubreddit)
         } else {
+          if rs.Data.ActiveUserCount == 0 {
+            log.Println("subredditData: ", string(subredditData[:]))
+          }
           datapointDao.InsertDatapoints(currentSubreddit.Name, rs.Data.ActiveUserCount, rs.Data.Subscribers)
         }
         counter++
