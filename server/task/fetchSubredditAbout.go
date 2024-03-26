@@ -1,7 +1,6 @@
 package task
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"server/dao"
@@ -25,7 +24,6 @@ func fetchSubredditAbout() {
       case <- ticker.C:
         currentSubreddit := subreddits[counter]
         subredditData := redditService.FetchDataFromReddit(currentSubreddit.Name)
-        fmt.Println("subredditData: ", string(subredditData[:]))
 
         var rs = &service.SubRedditAboutResponse{}
         err := redditService.UnMarshalAboutResponseToStruct(subredditData, rs)

@@ -19,7 +19,7 @@ type RedditService struct {
 
 func(r RedditService) FetchDataFromReddit(subreddit string) []byte {
   r.Method = "GET"
-  r.Url = fmt.Sprintf("https://oauth.reddit.com/%s/about", subreddit)
+  r.Url = fmt.Sprintf("https://oauth.reddit.com/%s/about.json", subreddit)
   req, err := http.NewRequest(r.Method, r.Url, nil)
   if err != nil {
     fmt.Println(err)
