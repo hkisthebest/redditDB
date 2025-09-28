@@ -20,4 +20,4 @@ It's only charting the users for now, for the purpose of letting you know when t
 - [ ] Fix query cronjob stopping when deploying
 - [x] Grafana logging
 ## Contribution
-This is just a side project of mine. However, feel free to open an issue for any suggestions or bug fixes!
+This is just a side project of mine. However, feel free to open an issue for any suggestions or bug fixes.
